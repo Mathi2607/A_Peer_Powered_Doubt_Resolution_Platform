@@ -504,3 +504,65 @@ width:350px;
 text-align:center;
 
 }
+
+.mentor-request-card{
+
+margin-top:30px;
+background:#1e293b;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.5);
+
+}
+
+.mentor-list{
+
+max-height:250px;
+overflow-y:auto;
+
+}
+
+.mentor-item{
+
+background:#0f172a;
+padding:10px;
+margin:10px 0;
+border-radius:6px;
+
+}
+
+.pending{
+color:orange;
+}
+
+.accepted{
+color:lime;
+}
+
+.rejected{
+color:red;
+}
+
+.mentor-link{
+text-decoration:none;
+color:inherit;
+}
+
+.mentor-item{
+
+background:#0f172a;
+padding:15px;
+margin:10px 0;
+border-radius:8px;
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.mentor-item:hover{
+
+transform:scale(1.03);
+box-shadow:0 0 12px rgba(0,0,0,0.6);
+
+}

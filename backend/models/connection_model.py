@@ -92,3 +92,16 @@ def is_connected(user1,user2):
     conn.close()
 
     return connection
+
+def get_requested_mentors(username):
+
+    conn = get_db()
+
+    mentors = conn.execute("""
+    SELECT * FROM connections
+    WHERE user1=?
+    """,(username,)).fetchall()
+
+    conn.close()
+
+    return mentors

@@ -10,6 +10,7 @@ from models.connection_model import accept_request, reject_request
 from models.chat_model import get_chat_users
 from models.notification_model import create_notification
 from models.notification_model import get_notifications
+from models.connection_model import get_requested_mentors
 
 
 user_bp = Blueprint('user',__name__)
@@ -62,11 +63,14 @@ def profile():
 
     chats = get_chat_users(username)
 
+    mentors = get_requested_mentors(username)
+
     return render_template(
         "profile.html",
         user=user,
         requests=requests,
-        chats=chats
+        chats=chats,
+        mentors=mentors
     )
 
 @user_bp.route('/edit_profile',methods=['POST'])

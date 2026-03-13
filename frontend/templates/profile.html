@@ -41,6 +41,56 @@
 
 </div>
 
+<div class="mentor-request-card">
+
+<h2>Requested Mentors</h2>
+
+<div class="mentor-list">
+
+{% if mentors %}
+
+{% for m in mentors %}
+
+<a href="/mentor/{{m.user2}}" class="mentor-link">
+
+<div class="mentor-item">
+
+<p><b>Mentor:</b> {{m.user2}}</p>
+
+<p><b>Request Type:</b> {{m.request_type}}</p>
+
+<p>
+<b>Status:</b>
+
+{% if m.status == "pending" %}
+<span class="pending">Pending</span>
+
+{% elif m.status == "accepted" %}
+<span class="accepted">Accepted</span>
+
+{% elif m.status == "rejected" %}
+<span class="rejected">Rejected</span>
+
+{% endif %}
+
+</p>
+
+</div>
+
+</a>
+
+{% endfor %}
+
+{% else %}
+
+<p>No mentor requests yet</p>
+
+{% endif %}
+
+</div>
+
+</div>
+
 <h3>Mentor Requests</h3>
 
 <div class="request-list">
