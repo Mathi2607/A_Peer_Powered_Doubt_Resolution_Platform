@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<!-- Fixed Top Section -->
+<div class="topbar">
+
+<div class="top-left">
+<a href="/profile" class="profile-icon">👤</a>
+<span class="username">{{username}}</span>
+</div>
+
+<div class="top-center">
+<h1 class="title">Student Skill Sharing Platform</h1>
+
+<form action="/search" method="POST" class="search-form">
+<input type="text" name="skill" placeholder="Search skill...">
+<button class="btn">Search</button>
+</form>
+</div>
+
+</div>
+
+<!-- Page Content -->
+<div class="content">
+
+<p class="description">
+Connect with other students and learn new skills by sharing knowledge.
+</p>
+
+<div class="user-results">
+
+{% if users %}
+<h2>Available Mentors</h2>
+
+{% for user in users %}
+<div class="user-card">
+<h3>{{user.username}}</h3>
+<p>{{user.skill}}</p>
+<a href="/mentor/{{user.username}}" class="btn">View</a>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if videos %}
+<h2>No mentor found. Suggested Learning Videos</h2>
+
+{% for v in videos %}
+<div class="video-card">
+<h3>{{v.title}}</h3>
+<a href="{{v.link}}" target="_blank" class="btn">Watch on YouTube</a>
+</div>
+{% endfor %}
+{% endif %}
+
+</div>
+
+{% if notifications %}
+
+<div class="modal">
+
+<div class="modal-content">
+
+<h2>Notifications 🔔</h2>
+
+{% for n in notifications %}
+
+<p>{{n.message}}</p>
+
+{% endfor %}
+
+<button onclick="closeModal()" class="btn">OK</button>
+
+</div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+<script>
+
+function closeModal(){
+document.querySelector(".modal").style.display="none"
+}
+
+</script>
+
+</body>
+</html>

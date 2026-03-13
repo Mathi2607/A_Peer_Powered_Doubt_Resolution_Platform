@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body class="chat-body">
+
+<div class="chat-container">
+
+<h2>Chat with {{other}}</h2>
+
+<div class="chat-box">
+
+{% for m in messages %}
+
+<div class="message">
+
+<b>{{m.sender}}:</b> {{m.message}}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<form method="POST" action="/send/{{other}}">
+
+<input name="message" placeholder="Type message..." required>
+
+<button class="btn">Send</button>
+
+</form>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body class="admin-body">
+
+<!-- FIXED HEADER -->
+<div class="admin-header">
+
+<h1>Admin Dashboard</h1>
+
+<div class="admin-buttons">
+
+<button onclick="showSection('users')" class="btn">View Users</button>
+
+<button onclick="showSection('addSkill')" class="btn">Add Skills</button>
+
+<button onclick="showSection('skills')" class="btn">View Skills</button>
+
+<a href="/logout" class="btn">Logout</a>
+
+</div>
+
+</div>
+
+
+<!-- CARD CONTENT AREA -->
+<div class="admin-card-container">
+
+<!-- USERS LIST -->
+<div id="users" class="admin-section">
+
+<h2>Users</h2>
+
+{% for u in users %}
+
+<div class="admin-item">
+
+<div onclick="toggleUser('{{u.id}}')" class="clickable">
+{{u.username}}
+</div>
+
+<div id="user{{u.id}}" class="details">
+
+<p>Email : {{u.email}}</p>
+<p>Phone : {{u.phone}}</p>
+<p>Education : {{u.education}}</p>
+<p>Skill : {{u.skill}}</p>
+
+<button onclick="closeDetails('user{{u.id}}')" class="btn cancel">Close</button>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+
+<!-- ADD SKILL FORM -->
+<div id="addSkill" class="admin-section">
+
+<h2>Add Skill / Video</h2>
+
+<form method="POST" action="/add_skill">
+
+<input name="skill" placeholder="Skill">
+
+<input name="title" placeholder="Video Title">
+
+<input name="link" placeholder="YouTube Link">
+
+<button class="btn">Add</button>
+
+</form>
+
+</div>
+
+
+
+<!-- SKILLS LIST -->
+<div id="skills" class="admin-section">
+
+<h2>Skills</h2>
+
+{% for s in skills %}
+
+<div class="admin-item">
+
+<div onclick="toggleSkill('{{s.id}}')" class="clickable">
+
+{{s.skill_name}}
+
+</div>
+
+<div id="skill{{s.id}}" class="details">
+
+<a href="/delete_skill/{{s.id}}" class="btn danger">Remove</a>
+
+<button onclick="closeDetails('skill{{s.id}}')" class="btn cancel">Close</button>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+/* Hide all sections then show selected */
+
+function showSection(section){
+
+let sections=document.querySelectorAll(".admin-section")
+
+sections.forEach(s=>s.style.display="none")
+
+document.getElementById(section).style.display="block"
+
+}
+
+
+/* Toggle user details */
+
+function toggleUser(id){
+
+let el=document.getElementById("user"+id)
+
+if(el.style.display==="block"){
+el.style.display="none"
+}else{
+el.style.display="block"
+}
+
+}
+
+
+/* Toggle skill details */
+
+function toggleSkill(id){
+
+let el=document.getElementById("skill"+id)
+
+if(el.style.display==="block"){
+el.style.display="none"
+}else{
+el.style.display="block"
+}
+
+}
+
+
+/* Close detail box */
+
+function closeDetails(id){
+
+document.getElementById(id).style.display="none"
+
+}
+
+</script>
+
+
+</body>
+
+</html>

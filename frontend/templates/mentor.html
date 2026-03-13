@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body class="mentor-body">
+
+<div class="mentor-card">
+
+<h2>{{user.username}}</h2>
+
+<p><b>Email:</b> {{user.email}}</p>
+<p><b>Phone:</b> {{user.phone}}</p>
+<p><b>Education:</b> {{user.education}}</p>
+<p><b>Skill:</b> {{user.skill}}</p>
+
+<div class="mentor-buttons">
+
+<h2>Request Type</h2>
+
+{% if status == None %}
+
+<a href="/send_request/{{user.username}}/doubt" class="btn primary">
+Ask Doubt
+</a>
+
+<a href="/send_request/{{user.username}}/learn" class="btn secondary">
+Request Learning
+</a>
+
+{% elif status.status == "pending" %}
+
+<button class="btn" disabled>
+Request Sent (Pending)
+</button>
+
+{% elif status.status == "accepted" %}
+
+<a href="/chat/{{user.username}}" class="btn">
+Chat
+</a>
+
+<a href="/block/{{user.username}}" class="btn danger">
+Block
+</a>
+
+{% elif status.status == "rejected" %}
+
+<button class="btn danger" disabled>
+Request Rejected
+</button>
+
+{% endif %}
+
+</div>
+</div>
+
+</body>
+</html>

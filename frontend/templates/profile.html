@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body class="profile-body">
+
+<div class="profile-container">
+
+<div class="profile-card">
+
+<h2>User Profile</h2>
+
+<p>ID : {{user.id}}</p>
+
+<p>Username : {{user.username}}</p>
+
+<p>Email : {{user.email}}</p>
+
+<p>Phone : {{user.phone}}</p>
+
+<p>Education : {{user.education}}</p>
+
+<p>Skill : {{user.skill}}</p>
+
+</div>
+
+<div class="profile-menu">
+
+<button onclick="showEdit()" class="btn">Edit Profile</button>
+
+<button onclick="showPassword()" class="btn">Change Password</button>
+
+<a href="/delete_account" class="btn danger">Delete Account</a>
+
+<a href="/logout" class="btn">Logout</a>
+
+</div>
+
+<h3>Mentor Requests</h3>
+
+<div class="request-list">
+
+{% for r in requests %}
+
+<div class="request-card">
+
+<p><b>{{r.user1}}</b> sent a request</p>
+
+<p>Type: {{r.request_type}}</p>
+
+<a href="/accept_request/{{r.id}}" class="btn">
+Accept
+</a>
+
+<a href="/reject_request/{{r.id}}" class="btn danger">
+Reject
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div id="editForm" class="slide-form">
+
+<form method="POST" action="/edit_profile">
+
+<input name="email" placeholder="Email">
+
+<input name="phone" placeholder="Phone">
+
+<input name="education" placeholder="Education">
+
+<input name="skill" placeholder="Skill">
+
+<button class="btn">Done</button>
+
+<button type="button" onclick="hideForms()" class="btn cancel">Cancel</button>
+
+</form>
+
+</div>
+
+<div id="passwordForm" class="slide-form">
+
+<form method="POST" action="/change_password">
+
+<input type="password" name="current" placeholder="Current Password">
+
+<input type="password" name="new" placeholder="New Password">
+
+<button class="btn">Change</button>
+
+<button type="button" onclick="hideForms()" class="btn cancel">Cancel</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+
+function showEdit(){
+document.getElementById("editForm").style.display="block"
+}
+
+function showPassword(){
+document.getElementById("passwordForm").style.display="block"
+}
+
+function hideForms(){
+document.getElementById("editForm").style.display="none"
+document.getElementById("passwordForm").style.display="none"
+}
+
+</script>
+
+<div class="chat-list">
+
+<h3>Your Chats</h3>
+
+<div class="chat-scroll">
+
+{% for c in chats %}
+
+<a href="/chat/{{c.chat_user}}" class="chat-user">
+
+<div class="chat-card">
+
+👤 {{c.chat_user}}
+
+</div>
+
+</a>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</body>
+
+</html>
