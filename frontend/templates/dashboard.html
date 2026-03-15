@@ -60,37 +60,8 @@ Connect with other students and learn new skills by sharing knowledge.
 
 </div>
 
-{% if notifications %}
-
-<div class="modal">
-
-<div class="modal-content">
-
-<h2>Notifications 🔔</h2>
-
-{% for n in notifications %}
-
-<p>{{n.message}}</p>
-
-{% endfor %}
-
-<button onclick="closeModal()" class="btn">OK</button>
 
 </div>
-
-</div>
-
-{% endif %}
-
-</div>
-
-<script>
-
-function closeModal(){
-document.querySelector(".modal").style.display="none"
-}
-
-</script>
 
 </body>
 </html>

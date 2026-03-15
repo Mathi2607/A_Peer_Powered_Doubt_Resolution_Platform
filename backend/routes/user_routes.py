@@ -8,8 +8,6 @@ from models.connection_model import send_request
 from models.connection_model import get_received_requests
 from models.connection_model import accept_request, reject_request
 from models.chat_model import get_chat_users
-from models.notification_model import create_notification
-from models.notification_model import get_notifications
 from models.connection_model import get_requested_mentors
 
 
@@ -19,14 +17,11 @@ user_bp = Blueprint('user',__name__)
 
 def dashboard():
 
-    username=session.get('user')
-
-    notifications = get_notifications(username)
+    username = session.get('user')
 
     return render_template(
         "dashboard.html",
-        username=username,
-        notifications=notifications
+        username=username
     )
 
 
@@ -173,43 +168,6 @@ def send_request_route(mentor,req_type):
 @user_bp.route('/accept_request/<int:id>')
 def accept(id):
 
-    req=accept_request(id)
-
-    create_notification(
-        req["user2"],
-        req["user1"],
-        f"{req['user2']} accepted your request"
-    )
+    accept_request(id)
 
     return redirect('/profile')
-
-
-@user_bp.route('/reject_request/<int:id>')
-def reject(id):
-
-    req=reject_request(id)
-
-    create_notification(
-        req["user2"],
-        req["user1"],
-        f"{req['user2']} rejected your request"
-    )
-
-    return redirect('/profile')
-
-@user_bp.route('/block/<user>')
-def block_user(user):
-
-    conn = get_db()
-
-    conn.execute("""
-    DELETE FROM connections
-    WHERE user1=? AND user2=?
-    """,(session['user'],user))
-
-    conn.commit()
-    conn.close()
-
-    return redirect('/dashboard')
-
-    
